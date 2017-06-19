@@ -1,0 +1,15 @@
+---
+date: "6/18/2017"
+output: html_document
+---
+
+## June 18, 2017
+Below we show Starbucks locations in the Baltimore area. The data was acquired from Wikimapia.
+
+```{r}
+library(leaflet)
+starbucks <- read.csv("starbucks.csv", header = FALSE)
+names(starbucks) <- c("name", "lat","lng","east", "west", "south", "north")
+coffeeIcon <- makeIcon("http://img.clipartall.com/coffee-cup-clip-art-at-clker-coffee-clipart-600_519.png", iconWidth = 31*215/230, iconHeight = 31)
+starbucks %>% leaflet() %>% addTiles() %>% addMarkers(icon=coffeeIcon,popup=starbucks$name)
+```
